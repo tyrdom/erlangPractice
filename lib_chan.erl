@@ -35,17 +35,17 @@ start_server() ->
 	%		exit(nogoodConfig,Why)
 %	end.
 
-check_terms(ConfigData) -> %格式检查
-	L = map(fun(X) -> check_term(X) end, ConfigData), %遍历读取的文件检查
-	[X||{error,X} <- L].
+%check_terms(ConfigData) -> %格式检查
+%	L = map(fun(X) -> check_term(X) end, ConfigData), %遍历读取的文件检查
+%	[X||{error,X} <- L].
 
 
-check_term({port,P}) %检查端口号是不是数字
-	when is_integer(P) ->ok;
-check_term({service,_,password,_,mfa,_,_,_}) ->ok; %检查其他配置是不是符合格式
+%check_term({port,P}) %检查端口号是不是数字
+%	when is_integer(P) ->ok;
+%check_term({service,_,password,_,mfa,_,_,_}) ->ok; %检查其他配置是不是符合格式
 
-check_term(Other) ->
-	{error,{nogoodConfigTerm,Other}}.
+%check_term(Other) ->
+%	{error,{nogoodConfigTerm,Other}}.
 
 
 start_server_step1(ConfigData) ->
@@ -137,8 +137,7 @@ connect(Host,Port,Service,Secret,ArgC) ->			%可供使用的连接函数，开�
 				ok -> {ok,MM};
 				Errors ->Errors
 			end;
-
-		{MM,Error} ->Error		
+		{MM,Error} ->Error
 	end.
 
 a_connect(Parent,Host,Port) ->						%开启的链接进程
@@ -185,16 +184,9 @@ rpc(MM,Q) ->
 cast(MM,Q) -> send(MM,Q).
 
 
-
-
-
 wait_close(MM) ->
 	receive
 		{chan_closed,MM} -> true
 	after 5000 ->
 		io:format("error lib_chan~n"),true
 	end.
-
-
-
-

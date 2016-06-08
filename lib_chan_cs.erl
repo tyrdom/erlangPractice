@@ -53,7 +53,6 @@ cold_start(Master,Port,Fun,Max,PacketLen) ->
 								{packet,PacketLen},
 								{reuseaddr,true},
 								{active,true}
-
 						]) of
 		{ok,Listen} ->
 			io:format("Listening to: ~p~n",[Listen]),

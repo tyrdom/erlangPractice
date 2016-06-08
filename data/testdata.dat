@@ -1,0 +1,3 @@
+{person,"joe","arm",[{occupation,programmer},{fav,game}]}.
+
+{cat,{name,"zap"},{owner,"joe"}}.

@@ -4,9 +4,12 @@
 make_challenge() ->
 	random_string(25).
 
-is_resp_correct(_Challenge,_Resp,_Secret) ->
+is_resp_correct(Challenge,Resp,Secret) ->
 %需要md5验证算法模块
-	ture.
+	case make_resp(Challenge,Secret) of
+		Resp -> true;
+		_Other -> false
+	end.
 
 random_string(N)->
 	random_seed(),
