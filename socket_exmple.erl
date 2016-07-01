@@ -62,6 +62,7 @@ start_group_server() -> %多线每个port一个服务
 
 oneservent(Listen) ->
 	{ok,Socket} =gen_tcp:accept(Listen),
+	io:format("socket is ~p~n",[Socket]),
 	spawn_link(fun() -> oneservent(Listen) end),
 	loop(Socket). 
 
@@ -75,6 +76,7 @@ start_group_recv_server(Port) -> %多线阻塞 socket_exmple:start_group_recv_se
 
 oneservent1(Listen) ->
 	{ok,Socket} =gen_tcp:accept(Listen),
+	io:format("socket is ~p~n",[Socket]),
 	spawn_link(fun() -> oneservent1(Listen) end),
 	loop_recv(Socket). 
 
@@ -105,6 +107,8 @@ start_group_once_server(Port) -> %多线半阻塞 socket_exmple:start_group_once
 
 oneservent2(Listen) ->
 	{ok,Socket} =gen_tcp:accept(Listen),
+	Sock =list_to_atom(Socket),
+	io:format("socket is atom ~p~n",[Sock]),
 	spawn_link(fun() -> oneservent2(Listen) end),
 	loop_once(Socket).
 
